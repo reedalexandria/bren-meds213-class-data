@@ -9,14 +9,16 @@ install.packages("EML")
 install.packages("emld") #an effective back-end for other 'R'-based tools working with 'EML
 
 # Load Packages
+library(EML)
+library(emld)
 
 # Starting our EML Record
 # Describing the Coverage (Temporal and Geographic)
 
-geographicDescription <- 
+geographicDescription <- "Loma del Mulhacen, Sierra Nevada, Andalucia, Spain"
 
 coverage <- 
-  set_coverage(begin = , end = ,
+  set_coverage(begin = "2015-07-01", end = "2015-07-31",
                geographicDescription = geographicDescription,
                west = -3.30, east = 3.30, 
                north = 37.05, south = 37.05,
@@ -24,45 +26,54 @@ coverage <-
                altitudeUnits = "meter")
 
 # Methods
+methods_file <- "./methods.md"
+
 # You may copy it or call the .md file
+methods <- set_methods(methods_file)
 
 # Creating parties
+losapio <- eml$creator(
+  individualName = eml$individualName(
+    givenName = "Gianalberto", 
+    surName = "Losapio"),
+  electronicMailAddress = "losapio@standford.edu")
 
 # Persons and Organizations appear in multiple places in and EML document. R has a native object class R_person
-
+#R_person <- person("Giadalberto", "Losapio", "", "losapio@standford.edu")
 
 # Publisher
-  
+publisher <- "Standord University"
   
 # Contact Info  
- 
+contact <- list(
+  individualName = losapio$individualName,
+  electronicMailAddress = losapio$electronicMailAddress,
+  organizationName = "Stanford University")
 
 # Time for some keywords! As we learned these are important for findability.
 # We will create a keywordSet which is essentially a list of lists
 # We may also refer to controlled vocabularies and specific thesaurus for terms such as LTER's (https://vocab.lternet.edu/)
 
-
 # Publication Date
-    
+pubDate <- "2021"
 
 # Title
-
+title <- "Plant-pollinator observations for: An experimental approach to assessing the 
+impact of ecosystem engineers on biodiversity and ecosystem functions"
 
 # Abstract
+abstract_file <- "./abstract.md"
 # You may copy it or call the .md file
-
-
+abstract_set <- set_TextType(abstract_file)
 
 # Licensing and Rights
-
+intellectualRights <- "Creative Commons CCO License"
 
 # Time to create our dataset element!
-
 dataset <- list(
   title = title,
-  creator = giadalberto,
-  pubDate = pubDate,
-  ...)
+  creator = gianalberto, #we named it losapio earlier
+  pubDate = pubDate)
 
 # We should now create our root element for EML which will hang everything else
 

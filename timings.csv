@@ -1,0 +1,11 @@
+test,0
+test,0
+test,0
+with_index_a,.01200
+with_index_a,.01200
+not_in_method,.01300
+outer_join_method,.01200
+set_operation_method,.01200
+not_in_method,.01000
+not_in_method,.01300
+not_in_method,.01233
